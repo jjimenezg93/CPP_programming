@@ -94,6 +94,7 @@ void TList::deleteAllNodes() {
 			nodeDelete = m_firstNode;
 		}
 	}
+	m_size = 0;
 	m_currentNode = m_firstNode;
 	m_lastNode = m_firstNode;
 }
