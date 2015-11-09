@@ -42,8 +42,19 @@ TList::TList(const TList &listCopy) {
 	}
 }
 
-TList GetReverseList(TList lstSrc) {
-
+TList GetReverseList(TList &lstSrc) {
+	TList copy = TList();
+	const char * ptr;
+	if (lstSrc.Size() > 0) {
+		for (unsigned int l = 0; l < lstSrc.Size(); l++) {
+			for (unsigned int i = 0; i < lstSrc.Size() - 2; i++) {		//se mueve current al penúltimo elemento
+				lstSrc.Next();
+			}
+			ptr = lstSrc.Next();				//se coge el último, en cada ejecución 1 menos
+			copy.Push(ptr);
+		}
+	}
+	return copy;
 }
 
 unsigned int TList::Size() {
@@ -176,8 +187,19 @@ int main() {
 	list2->Push("tal?");
 	printf_s("list2.Next() = %s\n", list2->Next());
 
-	delete list;
 	delete list2;
+
+	//GetReverseList
+	list->Push("tal");
+	list->Push("estas?");
+
+	TList listInv = GetReverseList(*list);
+	printf_s("listInv.First() = %s\n", listInv.First());
+	printf_s("listInv.Next() = %s\n", listInv.Next());
+	printf_s("listInv.Next() = %s\n", listInv.Next());
+	printf_s("listInv.Next() = %s\n", listInv.Next());
+
+	delete list;
 
 	getchar();
 }

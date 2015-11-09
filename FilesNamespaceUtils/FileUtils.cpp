@@ -74,6 +74,7 @@ namespace FileUtils {
 		return sum;
 	}
 
+	//new utility
 	TList * numsList(const unsigned int fileId, TList *nums) {
 		FILE * file = reinterpret_cast<FILE *>(fileId);
 		char *ptr;
@@ -99,7 +100,7 @@ namespace FileUtils {
 			} else {
 				*aux = '\0';
 				nums->Push(ptr);
-				printf_s("Pushed %s\n", ptr);
+				printf_s("Pushed %s\n", ptr);		//print read nums
 
 				ptr = aux;
 				aux++;
