@@ -8,6 +8,5 @@ int main() {
 	Horse h = Horse();
 
 	f.move();
-	f2.move();
-	h.move();
+	f.jump();
 }
