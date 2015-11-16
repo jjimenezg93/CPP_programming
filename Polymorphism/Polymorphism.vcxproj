@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9B4E2525-FAD7-4859-9B2A-5545BC002AAD}</ProjectGuid>
+    <ProjectGuid>{A4B39E29-D345-47F3-8CA9-01CC00BB17D2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>VirtualFuncs</RootNamespace>
+    <RootNamespace>Polymorph</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,14 +146,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Animal.h" />
-    <ClInclude Include="Fish.h" />
-    <ClInclude Include="Horse.h" />
+    <ClInclude Include="CCom.h" />
+    <ClInclude Include="CFile.h" />
+    <ClInclude Include="CStream.h" />
+    <ClInclude Include="CTcp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Fish.cpp" />
-    <ClCompile Include="Horse.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="CCom.cpp" />
+    <ClCompile Include="CFile.cpp" />
+    <ClCompile Include="CTcp.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
