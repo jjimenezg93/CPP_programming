@@ -1,5 +1,5 @@
 /*
-	Julián Jiménez González
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
 #pragma warning(disable: 4514)
@@ -13,7 +13,7 @@
 #include "TList.h"
 
 namespace FileUtils {
-	unsigned int countString(const unsigned int &fileId, const char * string) {
+	unsigned int countString(const unsigned int fileId, const char * string) {
 		FILE * file = reinterpret_cast<FILE *>(fileId);
 		char * ptr;
 		unsigned short int count = 0;
@@ -34,17 +34,18 @@ namespace FileUtils {
 			if (ptr) {
 				count++;
 				ptr++;
-			} else
+			}
+			else
 				break;
 		}
 		delete ptr;
 		return count;
 	}
 
-	int addIntegers(const unsigned int &fileId) {
+	int addIntegers(const unsigned int fileId) {
 		int sum = 0;
 		FILE * file = reinterpret_cast<FILE *>(fileId);
-		char *ptr;			//debería ser const, pero entonces no es aceptado por fread_s
+		char *ptr;			//this should be const char *, but fread_s doesn't accept it
 
 		fseek(file, 0, SEEK_END);
 
@@ -63,18 +64,19 @@ namespace FileUtils {
 				ptr = strstr(ptr, ",");
 				if (!ptr)
 					break;
-			} else if (*ptr == '-') {
+			}
+			else if (*ptr == '-') {
 				ptr++;
 				sum -= atoi(ptr);
 				ptr = strstr(ptr, ",");
-			} else if (*ptr == ',')
+			}
+			else if (*ptr == ',')
 				ptr++;
 		}
 		delete ptr;
 		return sum;
 	}
 
-	//new utility
 	TList * numsList(const unsigned int fileId, TList *nums) {
 		FILE * file = reinterpret_cast<FILE *>(fileId);
 		char *ptr;
@@ -100,7 +102,7 @@ namespace FileUtils {
 			} else {
 				*aux = '\0';
 				nums->Push(ptr);
-				printf_s("Pushed %s\n", ptr);		//print read nums
+				printf_s("Pushed %s\n", ptr);
 
 				ptr = aux;
 				aux++;
@@ -115,30 +117,4 @@ namespace FileUtils {
 
 		return nums;
 	}
-}
-
-int main() {
-	//countString
-	unsigned int fileId = FileAccess::openFile("file.txt", "r");
-
-	printf_s("Searching for: \"hola\"\n");
-	printf_s("Occurrences of \"hola\": %d\n", FileUtils::countString(fileId, "hola"));
-	printf("closeFile(fileWrittenId) (0 ok)= %x\n", FileAccess::closeFile(fileId));
-
-	//addIntegers
-	unsigned int fileIntegersId = FileAccess::openFile("fileIntegers.txt", "r");
-
-	int resIntegersFile = FileUtils::addIntegers(fileIntegersId);
-
-	printf_s("resIntegersFile = %d\n", resIntegersFile);
-
-	//numsList
-
-	TList * nums = new TList();
-
-	FileUtils::numsList(fileIntegersId, nums);
-
-	delete nums;
-
-	getchar();
 }

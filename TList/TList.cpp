@@ -1,5 +1,5 @@
 /*
-	Julián Jiménez González
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
 #pragma warning(disable: 4514)
@@ -19,7 +19,7 @@ unsigned int TList::Size() {
 	return m_size;
 }
 
-int TList::Push(const char * newNodeValue) {		//añade al final
+int TList::Push(const char * newNodeValue) {
 	TNode * newNode;
 	newNode = new TNode(newNodeValue);
 	if (m_size == 0) {
@@ -42,7 +42,7 @@ const char * TList::First() {
 	if (m_firstNode != nullptr)
 		return m_firstNode->getString();
 	else {
-		const char * ret = "List is empty";
+		const char * ret = nullptr;
 		return ret;
 	}
 }
@@ -56,12 +56,12 @@ const char * TList::Next() {
 		}
 		return m_currentNode->getString();
 	} else {
-		const char * ret = "List is empty";
+		const char * ret = nullptr;
 		return ret;
 	}
 }
 
-const char * TList::Pop() {				//quita al principio
+const char * TList::Pop() {
 	if (m_firstNode != nullptr) {
 		TNode * nodeToDelete = m_firstNode;
 		const char * stringRet = nodeToDelete->getString();
@@ -77,10 +77,15 @@ const char * TList::Pop() {				//quita al principio
 		m_size--;
 		return stringRet;
 	} else
-		return "List is empty";
+		return nullptr;
 }
 
-void TList::Reset() {		//comparte el código con ~TList(), pero el destructor hace más cosas que limpiar los nodos
+void TList::Reset() {
+	this->deleteAllNodes();
+}
+
+TList::~TList() {
+	printf_s("Deleting list...\n");
 	this->deleteAllNodes();
 }
 
@@ -97,43 +102,4 @@ void TList::deleteAllNodes() {
 	m_size = 0;
 	m_currentNode = m_firstNode;
 	m_lastNode = m_firstNode;
-}
-
-TList::~TList() {
-	printf_s("Deleting list...\n");
-	this->deleteAllNodes();
-}
-
-int main() {
-	TList *list = new TList();
-	printf_s("list.First() = %s\n", list->First());
-	printf_s("list.Pop() = %s\n", list->Pop());
-
-	list->Push("Hola");
-	printf_s("Pushed \"Hola\"!\n");
-	list->Push("Holita");
-	printf_s("Pushed \"Holita\"!\n");
-	list->Push("Que tal?");
-	printf_s("Pushed \"Que tal?\"!\n");
-
-	printf_s("list.Next() = %s\n", list->Next());
-	printf_s("list.Next() = %s\n", list->Next());
-	printf_s("list.Next() = %s\n", list->Next());
-	printf_s("list.Next() = %s\n", list->Next());
-
-	printf_s("list.First() = %s\n", list->First());
-	printf_s("list.Pop() = %s\n", list->Pop());
-	printf_s("list.First() = %s\n", list->First());
-	
-	list->Push("Hola");
-
-	list->Reset();
-	printf_s("list reset!\n");
-
-	printf_s("list.First() = %s\n", list->First());
-	printf_s("list.Next() = %s\n", list->Next());
-
-	delete list;
-
-	getchar();
 }

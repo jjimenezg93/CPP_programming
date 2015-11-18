@@ -1,12 +1,16 @@
+/*
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
+*/
+
 #pragma once
 
 struct TNode {
 public:
 	TNode(const char * string);
 
-	const char * getString();			//retorna m_string
+	const char * getString();
 
-	TNode * getNextNode();					//retorna puntero al siguiente nodo si existe (m_nextNode), nullptr si no
+	TNode * getNextNode();					//returns m_nextNode if exists, nullptr if not
 
 	void setNextNode(TNode * next);
 

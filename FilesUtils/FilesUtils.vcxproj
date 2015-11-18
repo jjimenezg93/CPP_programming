@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="FileAccess.cpp" />
     <ClCompile Include="FileUtils.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileAccess.h" />

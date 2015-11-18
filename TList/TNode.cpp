@@ -1,3 +1,6 @@
+/*
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
+*/
 
 #include "TNode.h"
 

@@ -8,12 +8,12 @@ Julián Jiménez González
 #include <stdio.h>
 #include <stdlib.h>
 
-char * stringExists(char ** const tablePtr, char * &sExist, const unsigned short int tableSize, const unsigned short int index) {
+char * stringExists(const char * const * tablePtr, char * sExist, const unsigned short int tableSize, const unsigned short int index) {
 	if (index < tableSize) {
 		char flag = 'a';
 		unsigned short int stringSize = 0;
 
-		char * ptr = tablePtr[0];
+		const char * ptr = tablePtr[0];
 
 		const char *charTablePtr = tablePtr[index];
 
@@ -47,13 +47,12 @@ char * stringExists(char ** const tablePtr, char * &sExist, const unsigned short
 	return sExist;
 }
 
-char * invString(char ** const origTablePtr, char * &invTable, const unsigned short int index) {
+char * invString(const char * const * origTablePtr, char * invTable, const unsigned short int index) {
 	char flag = 'a';
-	unsigned short int stringSize = 0;		//tamaño del string, no cuenta '\0'
+	unsigned short int stringSize = 0;		//it doesn't count '\0'
 
-	const char *charTablePtr = origTablePtr[index];		//charTablePtr apunta al primer carácter de la cadena indicada con index
+	const char *charTablePtr = origTablePtr[index];
 
-	//se cuenta el número de caracteres del string, y se guardan en stringSize
 	while (flag) {
 		if (*charTablePtr != '\0') {
 			stringSize++;
@@ -62,17 +61,14 @@ char * invString(char ** const origTablePtr, char * &invTable, const unsigned sh
 			flag = '\0';
 	}
 
-	//cuando el bucle termina, charTablePtr está apuntando a '\0'
-	//se aprovecha para recorrer a la inversa, también se podría restaurar a tablePtr[index]
-	charTablePtr--;		//si no se disminuye, lo que se hará en el for será meter un '\0' de primero,
-					//con lo que siempre devolverá una cadena vacía
+	charTablePtr--;
 	
 	for (unsigned short int i = 0; i < stringSize; i++){
 		invTable[i] = *charTablePtr;
 		charTablePtr--;
 	}
 	
-	invTable[stringSize] = '\0';		//hay que introducir el caráter de fin de cadena
+	invTable[stringSize] = '\0';
 
 	return invTable;
 }
@@ -83,7 +79,7 @@ int main() {
 	printf_s("tableSize = %d\n", tableSize);
 	
 	char * sExist = (char*)malloc(40);
-	sExist = stringExists(table, sExist, tableSize, 2);	//puntero a zona de malloc, que se sobreescribe aquí
+	sExist = stringExists(table, sExist, tableSize, 2);
 	printf_s("stringExists = %s\n", sExist);
 
 	char * invS = (char*)malloc(20);

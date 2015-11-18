@@ -39,27 +39,3 @@ short int TFile::fileSize() {			//también se podría gestionar con una variable m
 
 	return numChars;
 }
-
-int main() {
-	TFile file = TFile("file.txt");
-
-	char * buffer = (char *)malloc(static_cast<size_t>(100));
-
-	file.openFile("r");
-	file.readFile(file.fileSize(), buffer);
-
-	buffer[file.fileSize()] = '\0';
-	file.closeFile();
-
-	unsigned short int i = 0;
-
-	while (buffer[i] != '\0') {
-		buffer[i] = 'X';		//modificamos el mismo buffer, con el que luego reescribiremos
-		i++;
-	}
-
-	file.openFile("r+");								//cuidado con abrirlo en modo r/w para el fileSize() siguiente
-	file.writeFile(file.fileSize(), buffer);
-	file.closeFile();
-	free(buffer);
-}

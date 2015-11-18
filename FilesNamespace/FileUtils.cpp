@@ -12,7 +12,7 @@
 #include "FileAccess.h"
 
 namespace FileUtils {
-	unsigned int countString(const unsigned int &fileId, const char * string) {
+	unsigned int countString(const unsigned int fileId, const char * string) {
 		FILE * file = reinterpret_cast<FILE *>(fileId);
 		char * ptr;
 		unsigned short int count = 0;
@@ -40,10 +40,10 @@ namespace FileUtils {
 		return count;
 	}
 
-	int addIntegers(const unsigned int &fileId) {
+	int addIntegers(const unsigned int fileId) {
 		int sum = 0;
 		FILE * file = reinterpret_cast<FILE *>(fileId);
-		char *ptr;			//debería ser const, pero entonces no es aceptado por fread_s
+		char *ptr;			//this should be const char *, but fread_s doesn't accept it
 
 		fseek(file, 0, SEEK_END);
 
@@ -72,20 +72,4 @@ namespace FileUtils {
 		delete ptr;
 		return sum;
 	}
-}
-
-int main() {
-	//countString
-	unsigned int fileId = FileAccess::openFile("file.txt", "r");
-
-	printf_s("Searching for: \"hola\"\n");
-	printf_s("Occurrences of \"hola\": %d\n", FileUtils::countString(fileId, "hola"));
-	printf("closeFile(fileWrittenId) (0 ok)= %x\n", FileAccess::closeFile(fileId));
-
-	//addIntegers
-	unsigned int fileIntegersId = FileAccess::openFile("fileIntegers.txt", "r");
-
-	int resIntegersFile = FileUtils::addIntegers(fileIntegersId);
-
-	printf_s("resIntegersFile = %d\n", resIntegersFile);
 }

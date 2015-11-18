@@ -1,5 +1,5 @@
 /*
-	Julián Jiménez González
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
 #pragma warning(disable: 4668)
@@ -13,10 +13,10 @@
 struct TEntity;
 typedef void(*funcEntity)(TEntity *);
 
-unsigned int randomNum;				//utilizado para movimiento aleatorio extra de entity3, modificado en main loop
+unsigned int randomNum;				//used for random movement of entity 3
 
 // ***************************************************************************************
-// ENTIDAD
+// ENTITY
 // ***************************************************************************************
 struct TEntity
 {
@@ -50,14 +50,14 @@ void Entity1_print(TEntity * const ent) {
 }
 
 void Entity1_move(TEntity * const ent) {
-	//set dirección x
+	//set x direction
 	if (static_cast<short int>(ent->m_ix - ent->m_ox) >= static_cast<short int>(80 - ent->m_stringSize)) {
 		ent->m_dx = 1;
 	} else if (static_cast<short int>(ent->m_ix - ent->m_ox) <= static_cast<short int>(0 + ent->m_stringSize)) {
 		ent->m_dx = 0;
 	}
 
-	//movimiento x
+	//x movement
 	if (!(ent->m_dx))
 		ent->m_ix++;
 	else
@@ -71,14 +71,14 @@ void Entity2_print(TEntity * const ent) {
 }
 
 void Entity2_move(TEntity * const ent) {
-	//set dirección y
+	//set y direction
 	if (static_cast<short int>(ent->m_oy - ent->m_iy) >= static_cast<short int>(22)) {
 		ent->m_dy = 0;
 	} else if (static_cast<short int>(ent->m_oy - ent->m_iy) <= static_cast<short int>(0)) {
 		ent->m_dy = 1;
 	}
 
-	//movimiento y
+	//y movement
 	if (!(ent->m_dy))
 		ent->m_iy++;
 	else
@@ -92,21 +92,21 @@ void Entity3_print(TEntity * const ent) {
 }
 
 void Entity3_move(TEntity * const ent) {
-	//set dirección x
+	//set x direction
 	if (static_cast<short int>(ent->m_ox - ent->m_ix) >= static_cast<short int>(80 - ent->m_stringSize)) {
 		ent->m_dx = 0;
 	} else if (static_cast<short int>(ent->m_ox - ent->m_ix) <= static_cast<short int>(0 + ent->m_stringSize)) {
 		ent->m_dx = 1;
 	}
 
-	//movimiento x
+	//x movement
 	if (!(ent->m_dx)) {
 		ent->m_ix += 3;
 	} else {
 		ent->m_ix -= 3;
 	}
 
-	//cambio de dirección random
+	//random direction change
 	if (randomNum % 2 == 0) {
 		if (ent->m_dx == 0) {
 			ent->m_dx = 1;
@@ -114,7 +114,7 @@ void Entity3_move(TEntity * const ent) {
 			ent->m_dx = 0;
 	}
 
-	//salto random
+	//random jump
 	if (randomNum >= 20 && randomNum <= 50) {
 		ent->m_dy = 1;
 		ent->m_iy -= (randomNum / 20);
@@ -130,14 +130,14 @@ void Entity4_print(TEntity * const ent) {
 }
 
 void Entity4_move(TEntity * const ent) {
-	//set dirección x
+	//set x direction
 	if (static_cast<short int>(ent->m_ox - ent->m_ix) >= static_cast<short int>(80 - ent->m_stringSize)) {
 		ent->m_dx = 0;
 	} else if (static_cast<short int>(ent->m_ox - ent->m_ix) <= static_cast<short int>(0 + ent->m_stringSize)) {
 		ent->m_dx = 1;
 	}
 	
-	//movimiento x
+	//x movement
 	if (!(ent->m_dx)) {
 		ent->m_ix += 4;
 	} else {
@@ -150,7 +150,7 @@ void Entity4_move(TEntity * const ent) {
 		ent->m_dy = 1;
 	}
 
-	//movimiento y
+	//y movement
 	if (!(ent->m_dy)) {
 		ent->m_iy++;
 	} else {
@@ -162,9 +162,9 @@ void Entity4_move(TEntity * const ent) {
 // ***************************************************************************************
 // MAIN
 // ***************************************************************************************
-int main(int argc, char* argv[])		//recomendación de MSDN para quitar warning C4100: eliminar los parámetros sin referenciar
+int main(int argc, char* argv[])
 {
-	//OTRA RECOMENDACIÓN PARA ELIMINAR WARNING C4100
+	//WARNING C4100
 	UNREFERENCED_PARAMETER(argc);	//WinNT.h
 	UNREFERENCED_PARAMETER(argv);
 
@@ -195,7 +195,7 @@ int main(int argc, char* argv[])		//recomendación de MSDN para quitar warning C4
 	//tableEntities
 	TEntity tableEntities[] = { *entity1, *entity2, *entity3, *entity4 };
 
-	TEntity *ptrEntities;		//ptrEntities se inicializa dentro del bucle, aquí no hace falta
+	TEntity *ptrEntities;		//ptrEntities is initialized inside the loop, no need to do it here
 
 #pragma warning(disable: 4127)		//warning conditional expression is constant
 	//action loop
@@ -207,12 +207,10 @@ int main(int argc, char* argv[])		//recomendación de MSDN para quitar warning C4
 		randomNum = static_cast<unsigned int>(rand() % 100 + 1);
 
 		for (unsigned short int i = 0; i < sizeof(tableEntities)/sizeof(tableEntities[0]); i++) {
-			(*(*ptrEntities->m_funcs))(ptrEntities);		//llamar a print
-			*(ptrEntities->m_funcs)++;					//mover puntero a función de movimiento
-			(*(*ptrEntities->m_funcs))(ptrEntities);		//llamar a move
-			*(ptrEntities->m_funcs)--;					//devolver puntero a la función de print
+			(ptrEntities->m_funcs[0])(ptrEntities);
+			(ptrEntities->m_funcs[1])(ptrEntities);
 
-			ptrEntities++;								//salto a entidad siguiente
+			ptrEntities++;
 		}
 
 		Sleep(300);
