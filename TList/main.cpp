@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include "Tlist.h"
-#include "TNode.h"
 
 int main() {
 	TList *list = new TList();

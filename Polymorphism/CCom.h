@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CCOM_H
+#define _CCOM_H
 
 #include "CStream.h"
 
@@ -18,3 +19,5 @@ public:
 private:
 	unsigned int m_comId;		//memory address of SerialPort buffer
 };
+
+#endif

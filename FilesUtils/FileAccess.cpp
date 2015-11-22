@@ -23,11 +23,11 @@ unsigned int closeFile(const unsigned int fileId) {
 unsigned int readFile(const unsigned int fileId, const short int numCharToRead, char * buffer) {
 	FILE *fileToRead = reinterpret_cast<FILE *>(fileId);
 
-	return fread(buffer, sizeof(*buffer), static_cast<size_t>(numCharToRead), fileToRead);	//size_t 4 bytes, short int 2 bytes -> conversión segura
+	return fread(buffer, sizeof(*buffer), static_cast<size_t>(numCharToRead), fileToRead);
 }
 
 unsigned int writeFile(const unsigned int fileId, short int numCharToWrite, const char * buffer) {
 	FILE * fileToWrite = reinterpret_cast<FILE *>(fileId);
 
-	return fwrite(buffer, sizeof(*buffer), static_cast<size_t>(numCharToWrite), fileToWrite);		//size_t 4 bytes, short int 2 bytes -> conversión segura
+	return fwrite(buffer, sizeof(*buffer), static_cast<size_t>(numCharToWrite), fileToWrite);
 }

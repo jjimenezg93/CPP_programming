@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CSTREAM_H
+#define _CSTREAM_H
 
 struct CStream {
 public:
@@ -10,3 +11,5 @@ public:
 
 	virtual int writeStream(char * buffer) = 0;
 };
+
+#endif

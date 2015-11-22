@@ -2,7 +2,8 @@
 ** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
-#pragma once
+#ifndef _FILEUTILS_H
+#define _FILEUTILS_H
 
 #include "TList.h"
 
@@ -11,5 +12,8 @@ namespace FileUtils {
 
 	int addIntegers(const unsigned int fileId);
 
+	//returns parameter TList * modified
 	TList * numsList(const unsigned int fileId, TList * nums);
 }
+
+#endif

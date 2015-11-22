@@ -2,7 +2,8 @@
 ** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
-#pragma once
+#ifndef _TNODE_H
+#define _TNODE_H
 
 struct TNode {
 public:
@@ -18,3 +19,5 @@ private:
 	const char * m_string;
 	TNode * m_nextNode;
 };
+
+#endif

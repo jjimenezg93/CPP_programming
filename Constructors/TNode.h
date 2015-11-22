@@ -1,14 +1,17 @@
-#pragma once
+/*
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
+*/
+
+#ifndef _TNODE_H
+#define _TNODE_H
 
 struct TNode {
 public:
 	TNode(const char * string);
 
-	TNode(const TNode &node);
+	const char * getString();
 
-	const char * getString();			//retorna m_string
-
-	TNode * getNextNode();					//retorna puntero al siguiente nodo si existe (m_nextNode), nullptr si no
+	TNode * getNextNode();					//returns m_nextNode if exists, nullptr if not
 
 	void setNextNode(TNode * next);
 
@@ -16,3 +19,5 @@ private:
 	const char * m_string;
 	TNode * m_nextNode;
 };
+
+#endif

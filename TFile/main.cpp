@@ -4,6 +4,7 @@
 
 #pragma warning(disable: 4514)
 #pragma warning(disable: 4710)
+#pragma warning(disable: 4820)
 
 #include <stdio.h>
 #include <cstdlib>
@@ -12,23 +13,26 @@
 int main() {
 	TFile file = TFile("file.txt");
 
-	char * buffer = (char *)malloc(static_cast<size_t>(100));
-
 	file.openFile("r");
-	file.readFile(file.fileSize(), buffer);
 
-	buffer[file.fileSize()] = '\0';
+	short int fSize = file.fileSize();
+
+	char * buffer = (char *)malloc((static_cast<size_t>(sizeof(char) * fSize) + 1));
+
+	file.readFile(fSize, buffer);
+
+	buffer[fSize] = '\0';
 	file.closeFile();
 
 	unsigned short int i = 0;
 
 	while (buffer[i] != '\0') {
-		buffer[i] = 'X';		//modificamos el mismo buffer, con el que luego reescribiremos
+		buffer[i] = 'X';
 		i++;
 	}
 
-	file.openFile("r+");								//cuidado con abrirlo en modo r/w para el fileSize() siguiente
-	file.writeFile(file.fileSize(), buffer);
-	file.closeFile();
+	file.openFile("r+");								//must be opened in r/w mode for the next fileSize()
+	file.writeFile(fSize, buffer);
+	//file.closeFile();			//commented to check in debug that destructor works fine
 	free(buffer);
 }

@@ -1,5 +1,5 @@
 /*
-	Julián Jiménez González
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
 #pragma warning(disable: 4514)
@@ -42,26 +42,11 @@ TList::TList(const TList &listCopy) {
 	}
 }
 
-TList GetReverseList(TList &lstSrc) {
-	TList copy = TList();
-	const char * ptr;
-	if (lstSrc.Size() > 0) {
-		for (unsigned int l = 0; l < lstSrc.Size(); l++) {
-			for (unsigned int i = 0; i < lstSrc.Size() - 2; i++) {		//se mueve current al penúltimo elemento
-				lstSrc.Next();
-			}
-			ptr = lstSrc.Next();				//se coge el último, en cada ejecución 1 menos
-			copy.Push(ptr);
-		}
-	}
-	return copy;
-}
-
-unsigned int TList::Size() {
+unsigned int TList::Size() const {
 	return m_size;
 }
 
-int TList::Push(const char * newNodeValue) {		//añade al final
+int TList::Push(const char * newNodeValue) {
 	TNode * newNode;
 	newNode = new TNode(newNodeValue);
 	if (m_size == 0) {
@@ -80,11 +65,11 @@ int TList::Push(const char * newNodeValue) {		//añade al final
 	}
 }
 
-const char * TList::First() {
+const char * TList::First() const {
 	if (m_firstNode != nullptr)
 		return m_firstNode->getString();
 	else {
-		const char * ret = "List is empty";
+		const char * ret = nullptr;
 		return ret;
 	}
 }
@@ -98,12 +83,12 @@ const char * TList::Next() {
 		}
 		return m_currentNode->getString();
 	} else {
-		const char * ret = "List is empty";
+		const char * ret = nullptr;
 		return ret;
 	}
 }
 
-const char * TList::Pop() {				//quita al principio
+const char * TList::Pop() {
 	if (m_firstNode != nullptr) {
 		TNode * nodeToDelete = m_firstNode;
 		const char * stringRet = nodeToDelete->getString();
@@ -119,10 +104,10 @@ const char * TList::Pop() {				//quita al principio
 		m_size--;
 		return stringRet;
 	} else
-		return "List is empty";
+		return nullptr;
 }
 
-void TList::Reset() {		//comparte el código con ~TList(), pero el destructor hace más cosas que limpiar los nodos
+void TList::Reset() {
 	this->deleteAllNodes();
 }
 
@@ -144,62 +129,4 @@ void TList::deleteAllNodes() {
 TList::~TList() {
 	printf_s("Deleting list...\n");
 	this->deleteAllNodes();
-}
-
-int main() {
-	TList *list = new TList();
-	printf_s("list.First() = %s\n", list->First());
-	printf_s("list.Pop() = %s\n", list->Pop());
-
-	list->Push("Hola");
-	printf_s("Pushed \"Hola\"!\n");
-	list->Push("Holita");
-	printf_s("Pushed \"Holita\"!\n");
-	list->Push("Que tal?");
-	printf_s("Pushed \"Que tal?\"!\n");
-
-	printf_s("list.Next() = %s\n", list->Next());
-	printf_s("list.Next() = %s\n", list->Next());
-	printf_s("list.Next() = %s\n", list->Next());
-	printf_s("list.Next() = %s\n", list->Next());
-
-	printf_s("list.First() = %s\n", list->First());
-	printf_s("list.Pop() = %s\n", list->Pop());
-	printf_s("list.First() = %s\n", list->First());
-	
-	list->Push("Hola");
-
-	list->Reset();
-	printf_s("list reset!\n");
-
-	printf_s("list.First() = %s\n", list->First());
-	printf_s("list.Next() = %s\n", list->Next());
-
-	//copy constructor
-	list->Push("Hola");
-	list->Push("que");
-
-	TList *list2 = new TList(*list);
-
-	printf_s("list2.First() = %s\n", list2->First());
-	printf_s("list2.Next() = %s\n", list2->Next());
-
-	list2->Push("tal?");
-	printf_s("list2.Next() = %s\n", list2->Next());
-
-	delete list2;
-
-	//GetReverseList
-	list->Push("tal");
-	list->Push("estas?");
-
-	TList listInv = GetReverseList(*list);
-	printf_s("listInv.First() = %s\n", listInv.First());
-	printf_s("listInv.Next() = %s\n", listInv.Next());
-	printf_s("listInv.Next() = %s\n", listInv.Next());
-	printf_s("listInv.Next() = %s\n", listInv.Next());
-
-	delete list;
-
-	getchar();
 }

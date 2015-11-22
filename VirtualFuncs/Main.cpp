@@ -7,6 +7,12 @@ int main() {
 	Fish f2 = Fish();
 	Horse h = Horse();
 
-	f.move();
-	f.jump();
+	Animal *pAnimal = &f;
+	Animal *pAnimalH = &h;
+	Fish   *pFish = &f;
+	Horse *pHorse = &h;
+	pAnimal->run();
+	pFish->run();
+	pFish->jump();
+	pHorse->jump();
 }

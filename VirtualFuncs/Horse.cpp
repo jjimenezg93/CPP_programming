@@ -15,3 +15,7 @@ void Horse::run() {
 void Horse::breath() {
 	printf_s("Fresh air!\n");
 }
+
+void Horse::jump() {
+	printf_s("Yiihaa\n");
+}

@@ -2,7 +2,8 @@
 ** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
-#pragma once
+#ifndef _TLIST_H
+#define _TLIST_H
 
 #include "TNode.h"
 
@@ -12,13 +13,17 @@ public:
 
 	unsigned int Size();
 
-	int Push(const char * psz);	//adds at the end
+	//adds at the end
+	int Push(const char * psz);
 
+	//nullptr if empty
 	const char * First();
 
+	//nullptr if empty
 	const char * Next();
 
-	const char * Pop();			//removes at the beginning
+	//removes at the beginning. nullptr if empty
+	const char * Pop();
 
 	void Reset();
 
@@ -32,3 +37,5 @@ private:
 
 	void deleteAllNodes();		//shared code between Reset() and ~TList()
 };
+
+#endif

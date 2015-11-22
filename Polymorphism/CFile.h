@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CFILE_H
+#define _CFILE_H
 
 #include "CStream.h"
 
@@ -18,3 +19,5 @@ public:
 private:
 	unsigned int m_fileId;		//memory address of file (e.g. TFile * file = m_fileId)
 };
+
+#endif

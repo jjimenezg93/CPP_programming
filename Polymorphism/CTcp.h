@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CTCP_H
+#define _CTCP_H
 
 #include "CStream.h"
 
@@ -18,3 +19,5 @@ public:
 private:
 	unsigned int m_tcpSocketId;		//memory address of socket structure, can be assigned to a pointer (e.g. CTcpSocket * ptr = m_tcpSocketId)
 };
+
+#endif

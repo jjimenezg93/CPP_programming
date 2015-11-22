@@ -1,3 +1,6 @@
+/*
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
+*/
 
 #include "TNode.h"
 
@@ -5,8 +8,6 @@ TNode::TNode(const char * string) {
 	m_string = string;
 	m_nextNode = nullptr;
 }
-
-TNode::TNode(const TNode &nodeToCopy) = default;
 
 const char * TNode::getString( )
 {

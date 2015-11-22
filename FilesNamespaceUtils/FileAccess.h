@@ -2,7 +2,8 @@
 ** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
-#pragma once
+#ifndef _FILEACCESS_H
+#define _FILEACCESS_H
 
 namespace FileAccess {
 	unsigned int openFile(const char * fileName, const char * fileMode);
@@ -13,3 +14,5 @@ namespace FileAccess {
 
 	unsigned int writeFile(const unsigned int fileId, const short int numCharToWrite, const char * buffer);
 }
+
+#endif

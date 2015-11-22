@@ -1,0 +1,10 @@
+Yo creo que TNode está bien fuera, porque es una clase que se podría reutilizar para una pila, y no habría que hacer muchos cambios
+para utilizarla en una lista doblemente enlazada.
+
+También se podría crear dentro y hacer copy&paste en cada una de esas clases, pero se duplicaría/triplicaría código.
+
+Teniendo la clase así, en principio no se necesitaría ningún cambio para utilizarlo en una pila ya que sólo tiene un puntero al
+siguiente nodo. En el caso de la lista doblemente enlazada se podría hacer una clase derivada de este TNode, y añadirle el puntero al
+elemento anterior.
+
+Esto es pensando en un proyecto más grande, en este caso está claro que sería más sencillo meterla dentro de la TList y ya está.

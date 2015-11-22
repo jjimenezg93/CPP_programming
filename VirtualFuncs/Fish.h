@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _FISH_H
+#define _FISH_H
 
 #include "Animal.h"
 
@@ -14,3 +15,5 @@ public:
 
 	void jump();
 };
+
+#endif

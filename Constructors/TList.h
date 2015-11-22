@@ -1,32 +1,33 @@
 /*
-Julián Jiménez González
+** Author: Julian Jimenez Gonzalez (jjimenezg93)
 */
 
-#pragma once
+#ifndef _TLIST_H
+#define _TLIST_H
+
 #include "TNode.h"
 
 struct TList {
 public:
-
 	TList();
 
 	TList(const TList &listCopy);
 
-	TList GetReverseList(TList lstSrc);
+	unsigned int Size() const;
 
-	unsigned int Size();
-
+	//adds at the end
 	int Push(const char * psz);
 
-	const char * First();
+	//nullptr if empty
+	const char * First() const;
 
+	//nullptr if empty
 	const char * Next();
 
+	//removes at the beginning. nullptr if empty
 	const char * Pop();
 
 	void Reset();
-
-	void deleteAllNodes();		//reutilización de código en Reset() y ~TList()
 
 	~TList();
 
@@ -35,4 +36,8 @@ private:
 	TNode * m_currentNode;
 	TNode * m_lastNode;
 	unsigned int m_size;
+
+	void deleteAllNodes();		//shared code between Reset() and ~TList()
 };
+
+#endif

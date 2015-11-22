@@ -1,23 +1,36 @@
-#pragma once
+#ifndef _TFILE_H
+#define _TFILE_H
 
 #include <stdio.h>
 
 struct TFile {
 public:
+	//CARE deallocating memory of fileName. It doesn't create a copy
 	TFile(const char * fileName);
 
-	unsigned int openFile(const char * fileMode);
+	//returns ptr to the file (casted into unsigned int) if OK, 0 if file isn't opened
+	unsigned int openFile(const char * fileMode);	
 
+	//returns 0 if OK, EOF if fclose failure, 1 if file isn't opened
 	int closeFile();
 
+	//IF numCharToRead != 0 -> returns number of elements read if OK, != numCharToRead if ERROR, 0 if file isn't opened
+	//ELSE returns 0
 	unsigned int readFile(const short int numCharToRead, char * buffer);
 
+	//IF numCharToRead != 0 -> returns number of elements read if OK, != numCharToWrite if ERROR, 0 if file isn't opened
+	//ELSE returns 0
 	unsigned int writeFile(const short int numCharToWrite, char * buffer);
 
-	//función extra para main()
+	//NEEDS FILE OPENED, if not returns 0
 	short int fileSize();
+
+	~TFile();
 
 private:
 	const char * m_fileName;
-	FILE * m_file;					//debería ser FILE * const, pero las funciones fopen, fread... no lo aceptan
+	bool fileOpened;
+	FILE * m_file;					//should be FILE * const, but fopen, fread... don't accept it
 };
+
+#endif
