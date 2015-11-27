@@ -17,7 +17,7 @@ public:
 
 	virtual void printElement();
 
-	~TPear();
+	virtual ~TPear();
 private:
 	char *m_content;
 };

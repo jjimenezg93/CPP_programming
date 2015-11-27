@@ -12,7 +12,7 @@ public:
 
 	virtual void setContent(void * newContent) = 0;*/
 
-	//virtual ~TElement();		//haria falta si los TElement se crearan dentro de la lista
+	virtual ~TElement() { }		//haria falta si los TElement se crearan dentro de la lista
 };
 
 #endif

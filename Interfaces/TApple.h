@@ -17,7 +17,7 @@ public:
 
 	virtual void printElement();
 
-	~TApple();
+	virtual ~TApple();
 private:
 	int *m_content;
 };
