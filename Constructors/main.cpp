@@ -8,6 +8,23 @@
 #include <stdio.h>
 #include "Tlist.h"
 
+TList GetReverseList(TList lstSrc) {
+	TList copy;
+	const char * ptr;
+
+	if (lstSrc.Size() > 0) {
+		for (unsigned int l = 0; l < lstSrc.Size(); l++) {
+			for (unsigned int i = 0; i < lstSrc.Size() - 2; i++) {
+				lstSrc.Next();
+
+			}
+			ptr = lstSrc.Next();
+			copy.Push(ptr);
+		}
+	}
+	return copy;
+}
+
 TList * GetReverseList(TList &lstSrc, TList *listCopy) {
 	const char * ptr;
 	if (lstSrc.Size() > 0) {
@@ -65,10 +82,18 @@ int main() {
 
 	delete list2;
 
-	//GetReverseList
 	list->Push("tal");
 	list->Push("estas?");
 
+	//TList GetReverseList(TList lstSrc)
+	TList listRev = GetReverseList(*list);
+
+	printf_s("listRev.First() = %s\n", listRev.First());
+	printf_s("listRev.Next() = %s\n", listRev.Next());
+	printf_s("listRev.Next() = %s\n", listRev.Next());
+	printf_s("listRev.Next() = %s\n", listRev.Next());
+
+	//TList * GetReverseList(TList &lstSrc, TList *listCopy)
 	//this is the way to avoid returning an object in the Stack
 	TList * listInv = new TList();
 

@@ -8,7 +8,6 @@ int main() {
 	Horse h = Horse();
 
 	Animal *pAnimal = &f;
-	Animal *pAnimalH = &h;
 	Fish   *pFish = &f;
 	Horse *pHorse = &h;
 	pAnimal->run();
